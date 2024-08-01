@@ -1,328 +1,151 @@
-# Guia para Iniciar um Projeto Node.js com TypeScript
+# Tutorial: Iniciando um Projeto Node.js com TypeScript
 
-Este guia irá mostrar como configurar e iniciar um projeto Node.js com TypeScript usando o Visual Studio Code (VS Code) em três ambientes diferentes: Linux, Windows e Codespace.
+## Introdução
 
-Obs: Caso fique com dúvidas, acesse o site [chatgpt](https://chatgpt.com/), mas não faça tudo dependendo dele.
+Neste tutorial, você aprenderá a configurar um servidor básico usando Node.js e TypeScript e a configurar um banco de dados SQLite. Vamos fazer isso passo a passo para garantir que tudo esteja claro.
 
-## O que é cada coisa?
+### O que você vai precisar
 
-- **Servidor**: Um servidor é um programa que atende a pedidos de outros programas, chamados clientes. Em um site, por exemplo, o servidor envia as páginas para o navegador do usuário.
-- **Node.js**: É um ambiente de execução JavaScript no lado do servidor. Permite rodar JavaScript fora do navegador.
-- **TypeScript**: É uma linguagem de programação desenvolvida pela Microsoft que é um superconjunto de JavaScript, adicionando tipagem estática.
-- **VS Code (Visual Studio Code)**: É um editor de código-fonte desenvolvido pela Microsoft. É leve e possui muitas extensões úteis.
-- **Express**: É um framework para Node.js que facilita a criação de aplicações web e APIs.
-- **GitHub**: É uma plataforma de hospedagem de código-fonte que usa Git para controle de versão.
-- **Codespace**: É uma ferramenta oferecida pelo GitHub para desenvolver diretamente na nuvem, usando VS Code no navegador.
+1. **Node.js**: [Download do Node.js](https://nodejs.org/)
+2. **Visual Studio Code (VSCode)**: [Download do VSCode](https://code.visualstudio.com/)
 
-## Parte 1: Linux
+### Instalação do Node.js
 
-### Pré-requisitos
+1. **Baixe o Node.js**:
+   - Acesse o site [Node.js](https://nodejs.org/).
+   - Clique no botão de download recomendado para a versão LTS (Long Term Support).
 
-1. **Node.js** e **npm** instalados no seu sistema.
-2. **Visual Studio Code** (VS Code) instalado.
+2. **Instale o Node.js**:
+   - Execute o instalador baixado.
+   - Siga as instruções, aceitando os termos e mantendo as configurações padrão.
+   - Após a instalação, abra o terminal (Prompt de Comando no Windows ou Terminal no macOS/Linux) e digite `node -v` para verificar a instalação. Você deve ver a versão do Node.js instalada.
 
-### Instalar VS Code no Linux
-- **Linux**: Vá ao site do [Visual Studio Code](https://code.visualstudio.com/), baixe o instalador e siga as instruções de instalação. Para distribuições baseadas em Debian/Ubuntu, você pode usar o seguinte comando:
-  ```sh
-  sudo apt update
-  sudo apt install code
-  ```
+### Instalação do Visual Studio Code (VSCode)
 
-### Instalar Node.js e npm no Linux
-- **Linux**: Acesse o site do [Node.js](https://nodejs.org/), baixe a versão LTS e siga as instruções de instalação. Ou você pode usar o seguinte comando:
-  ```sh
-  sudo apt update
-  sudo apt install nodejs npm
-  ```
+1. **Baixe o VSCode**:
+   - Acesse [Visual Studio Code](https://code.visualstudio.com/).
+   - Clique no botão de download para o seu sistema operacional.
 
-### Criar o Projeto no Linux
+2. **Instale o VSCode**:
+   - Execute o instalador baixado.
+   - Siga as instruções, aceitando os termos e mantendo as configurações padrão.
 
-1. **Crie um diretório para o projeto e acesse-o pelo VS Code**
-   ```sh
-   mkdir meu-projeto
-   cd meu-projeto
-   code .
-   ```
+### Instalação da Extensão Rest Client no VSCode
 
-2. **Abra o terminal integrado no VS Code** (Ctrl + `)
+1. **Abra o VSCode**:
+   - Clique no ícone do VSCode para abri-lo.
 
-### Inicializar o Projeto
+2. **Acesse a aba de Extensões**:
+   - No menu lateral esquerdo, clique no ícone de extensões (parece uma caixa aberta). 
+   - Alternativamente, pressione `Ctrl+Shift+X` no teclado.
 
-1. **Inicialize o projeto com npm**
-   ```sh
-   npm init -y
-   ```
-
-2. **Instale as dependências necessárias**
-   ```sh
-   npm install express cors sqlite3 sqlite
-   npm install --save-dev typescript nodemon ts-node @types/express @types/cors
-   ```
-
-### Inicialize o TypeScript
-   ```sh
-   npx tsc --init
-   ```
-
-### Crie a Estrutura de Diretórios e Arquivos
-   ```sh
-   mkdir src
-   touch src/app.ts
-   ```
-
-### Configurar o TypeScript
-
-1. **Abra o arquivo `tsconfig.json` e faça as seguintes alterações**
-   ```json
-   {
-     "compilerOptions": {
-       "target": "ES2017",
-       "module": "commonjs",
-       "outDir": "./dist",
-       "rootDir": "./src",
-       "strict": true,
-       "esModuleInterop": true,
-       "skipLibCheck": true,
-       "forceConsistentCasingInFileNames": true
-     }
-   }
-   ```
-
-### Configurar o `package.json`
-
-1. **Adicione o seguinte script ao seu `package.json`**
-   ```json
-   "scripts": {
-     "dev": "npx nodemon src/app.ts"
-   }
-   ```
-
-### Criar o Arquivo Inicial do Servidor
-
-1. **No arquivo `src/app.ts`, adicione o seguinte código**
-   ```typescript
-   import express from 'express';
-   import cors from 'cors';
-
-   const port = 3333;
-   const app = express();
-
-   app.use(cors());
-   app.use(express.json());
-
-   app.get('/', (req, res) => {
-     res.send('Hello World');
-   });
-
-   app.listen(port, () => {
-     console.log(`Server running on port ${port}`);
-   });
-   ```
-
-### Inicializar o Servidor
-
-1. **No terminal integrado, rode o servidor**
-   ```sh
-   npm run dev
-   ```
-
-Se tudo ocorrer bem, você verá a mensagem `Server running on port 3333` no terminal.
-
-### Testar o Servidor
-
-1. **Abra o navegador e acesse [http://localhost:3333](http://localhost:3333)**
-   - Você verá a mensagem `Hello World`.
+3. **Pesquise e instale a extensão Rest Client**:
+   - Na barra de pesquisa, digite `Rest Client`.
+   - Encontre a extensão `Rest Client` desenvolvida por `Huachao Mao` e clique no botão `Install`.
 
 ---
 
-## Parte 2: Windows
+## Passo 1: Configurando o Projeto
 
-### Pré-requisitos
+### 1. Crie uma Pasta para o Projeto
 
-1. **Node.js** e **npm** instalados no seu sistema.
-2. **Visual Studio Code** (VS Code) instalado.
+1. **Abra o VSCode**.
+2. **Crie ou abra uma pasta**:
+   - No menu superior, clique em **File > Open Folder...**.
+   - Selecione ou crie uma nova pasta para o seu projeto e clique em **Select Folder**.
 
-### Instalar VS Code no Windows
-- **Windows**: Vá ao site do [Visual Studio Code](https://code.visualstudio.com/), baixe o instalador e siga as instruções de instalação.
+### 2. Abra o Terminal no VSCode
 
-### Instalar Node.js e npm no Windows
-- **Windows**: Acesse o site do [Node.js](https://nodejs.org/), baixe a versão LTS e siga as instruções de instalação.
+1. **No VSCode**, vá até **Terminal > New Terminal** no menu superior.
+2. **O terminal aparecerá na parte inferior da tela**. Este é o lugar onde você digitará comandos.
 
-### Criar o Projeto no Windows
+### 3. Inicialize um Projeto Node.js
 
-1. **Crie um diretório para o projeto e acesse-o pelo VS Code**
-   - Abra o prompt de comando ou PowerShell e execute:
-   ```sh
-   mkdir meu-projeto
-   cd meu-projeto
-   code .
-   ```
-
-2. **Abra o terminal integrado no VS Code** (Ctrl + `)
-
-### Inicializar o Projeto
-
-1. **Inicialize o projeto com npm**
-   ```sh
+1. **No terminal**, digite:
+   ```bash
    npm init -y
    ```
+   - Este comando cria um arquivo `package.json` com configurações padrão. Esse arquivo é essencial para gerenciar as dependências e scripts do seu projeto.
 
-2. **Instale as dependências necessárias**
-   ```sh
-   npm install express cors sqlite3 sqlite
-   npm install --save-dev typescript nodemon ts-node @types/express @types/cors
+### 4. Instale as Dependências Necessárias
+
+1. **No terminal**, execute:
+   ```bash
+   npm install express cors sqlite3
+   npm install --save-dev typescript nodemon ts-node @types/express @types/cors @types/node
    ```
+   - `express`, `cors`, e `sqlite3` são pacotes principais para o servidor e o banco de dados.
+   - `typescript`, `nodemon`, `ts-node` são ferramentas para desenvolver com TypeScript.
+   - `@types/express`, `@types/cors`, e `@types/node` fornecem tipos TypeScript para essas bibliotecas.
 
-### Inicialize o TypeScript
-   ```sh
+### 5. Configure o TypeScript
+
+1. **Inicialize o TypeScript**:
+   ```bash
    npx tsc --init
    ```
+   - Isso cria um arquivo `tsconfig.json` com a configuração padrão para o TypeScript.
 
-### Crie a Estrutura de Diretórios e Arquivos
+### 6. Configure o `tsconfig.json`
 
-   - Use o comando `type` no PowerShell para criar o arquivo:
-   ```sh
-   mkdir src
-   type nul > src/app.ts
-   ```
+1. **Abra o arquivo `tsconfig.json`**:
+   - No painel esquerdo do VSCode, clique em **Explorer**.
+   - Encontre e abra o arquivo `tsconfig.json`.
 
-### Configurar o TypeScript
-
-1. **Abra o arquivo `tsconfig.json` e faça as seguintes alterações**
-   ```json
-   {
-     "compilerOptions": {
-       "target": "ES2017",
-       "module": "commonjs",
-       "outDir": "./dist",
-       "rootDir": "./src",
-       "strict": true,
-       "esModuleInterop": true,
-       "skipLibCheck": true,
-       "forceConsistentCasingInFileNames": true
+2. **Atualize as configurações**:
+   - Modifique o arquivo para se parecer com o seguinte:
+     ```json
+     {
+       "compilerOptions": {
+         "target": "ES2017",
+         "module": "commonjs",
+         "outDir": "./dist",
+         "rootDir": "./src",
+         "strict": true,
+         "esModuleInterop": true,
+         "skipLibCheck": true,
+         "forceConsistentCasingInFileNames": true
+       }
      }
-   }
-   ```
+     ```
+   - `outDir` define onde os arquivos JavaScript serão salvos após a compilação.
+   - `rootDir` define a pasta onde os arquivos TypeScript estão localizados.
 
-### Configurar o `package.json`
+### 7. Crie a Estrutura de Diretórios e Arquivos
 
-1. **Adicione o seguinte script ao seu `package.json`**
-   ```json
-   "scripts": {
-     "dev": "npx nodemon src/app.ts"
-   }
-   ```
-
-### Criar o Arquivo Inicial do Servidor
-
-1. **No arquivo `src/app.ts`, adicione o seguinte código**
-   ```typescript
-   import express from 'express';
-   import cors from 'cors';
-
-   const port = 3333;
-   const app = express();
-
-   app.use(cors());
-   app.use(express.json());
-
-   app.get('/', (req, res) => {
-     res.send('Hello World');
-   });
-
-   app.listen(port, () => {
-     console.log(`Server running on port ${port}`);
-   });
-   ```
-
-### Inicializar o Servidor
-
-1. **No terminal integrado, rode o servidor**
-   ```sh
-   npm run dev
-   ```
-
-Se tudo ocorrer bem, você verá a mensagem `Server running on port 3333` no terminal.
-
-### Testar o Servidor
-
-1. **Abra o navegador e acesse [http://localhost:3333](http://localhost:3333)**
-   - Você verá a mensagem `Hello World`.
-
----
-
-## Parte 3: Codespace
-
-### Criar uma Conta no Codespace
-
-1. **Criar uma Conta**
-   - Acesse o [GitHub Codespaces](https://github.com/features/codespaces) e crie uma conta.
-   - Após criar a conta, você pode criar um novo Codespace a partir do seu repositório ou diretamente do GitHub.
-
-### Criar o Projeto no Codespace
-
-1. **Crie um Novo Codespace**
-   - Vá para o repositório no GitHub onde deseja criar o Codespace.
-   - Clique no botão `Code` e selecione `Open with Codespaces` e, em seguida, `New codespace`.
-
-2. **Abra o terminal integrado no Codespace** (Ctrl + `)
-
-### Inicializar o Projeto
-
-1. **Inicialize o projeto com npm**
-   ```sh
-   npm init -y
-   ```
-
-2. **Instale as dependências necessárias**
-   ```sh
-   npm install express cors sqlite3 sqlite
-   npm install --save-dev typescript nodemon ts-node @types/express @types/cors
-   ```
-
-### Inicialize o TypeScript
-   ```sh
-   npx tsc --init
-   ```
-
-### Crie a Estrutura de Diretórios e Arquivos
-   ```sh
+1. **No terminal**, execute:
+   ```bash
    mkdir src
    touch src/app.ts
    ```
+   - `mkdir src` cria a pasta `src`.
+   - `touch src/app.ts` cria o arquivo `app.ts` dentro da pasta `src`.
 
+---
 
+## Passo 2: Configurando o Servidor
 
-### Configurar o TypeScript
+### 1. Configure o `package.json`
 
-1. **Abra o arquivo `tsconfig.json` e faça as seguintes alterações**
-   ```json
-   {
-     "compilerOptions": {
-       "target": "ES2017",
-       "module": "commonjs",
-       "outDir": "./dist",
-       "rootDir": "./src",
-       "strict": true,
-       "esModuleInterop": true,
-       "skipLibCheck": true,
-       "forceConsistentCasingInFileNames": true
-     }
-   }
-   ```
+1. **Abra o arquivo `package.json`**:
+   - No painel esquerdo do VSCode, clique em **Explorer**.
+   - Encontre e abra o arquivo `package.json`.
 
-### Configurar o `package.json`
-
-1. **Adicione o seguinte script ao seu `package.json`**
+2. **Adicione o seguinte script**:
    ```json
    "scripts": {
-     "dev": "npx nodemon src/app.ts"
+     "dev": "npx nodemon src/app.ts --exec ts-node"
    }
    ```
+   - Este script permite iniciar o servidor em modo de desenvolvimento, usando `nodemon` para reiniciar automaticamente quando houver alterações.
 
-### Criar o Arquivo Inicial do Servidor
+### 2. Crie o Arquivo Inicial do Servidor
 
-1. **No arquivo `src/app.ts`, adicione o seguinte código**
+1. **Abra o arquivo `src/app.ts`**:
+   - No painel esquerdo do VSCode, clique em **Explorer**.
+   - Encontre e abra o arquivo `src/app.ts`.
+
+2. **Adicione o seguinte código**:
    ```typescript
    import express from 'express';
    import cors from 'cors';
@@ -342,17 +165,165 @@ Se tudo ocorrer bem, você verá a mensagem `Server running on port 3333` no ter
    });
    ```
 
-### Inicializar o Servidor
+   - `import express from 'express';` e `import cors from 'cors';` importam os pacotes necessários.
+   - `const app = express();` cria uma instância do servidor Express.
+   - `app.use(cors());` e `app.use(express.json());` configuram o middleware para CORS e JSON.
+   - `app.get('/', (req, res) => { res.send('Hello World'); });` define uma rota que responde com "Hello World".
+   - `app.listen(port, () => { console.log(`Server running on port ${port}`); });` inicia o servidor na porta 3333 e exibe uma mensagem no terminal.
 
-1. **No terminal integrado, rode o servidor**
-   ```sh
+### 3. Inicie o Servidor
+
+1. **No terminal**, execute:
+   ```bash
    npm run dev
    ```
+   - O comando inicia o servidor em modo de desenvolvimento.
 
-Se tudo ocorrer bem, você verá a mensagem `Server running on port 3333` no terminal.
+2. **Verifique se o servidor está funcionando**:
+   - Abra o navegador e acesse `http://localhost:3333`. Você deve ver a mensagem `Hello World`.
 
-### Testar o Servidor
+---
 
-1. **Abra o navegador e acesse [http://localhost:3333](http://localhost:3333)**
-   - Você verá a mensagem `Hello World`.
+## Passo 3: Configurando o Banco de Dados
 
+### 1. Crie o Arquivo de Configuração do Banco de Dados
+
+1. **No terminal**, execute:
+   ```bash
+   touch src/database.ts
+   ```
+   - Cria um arquivo `database.ts` para gerenciar a conexão com o banco de dados.
+
+2. **Abra o arquivo `src/database.ts`**:
+   - No painel esquerdo do VSCode, clique em **Explorer**.
+   - Encontre e abra o arquivo `src/database.ts`.
+
+3. **Adicione o seguinte código**:
+   ```typescript
+   import { open, Database } from 'sqlite';
+   import sqlite3 from 'sqlite3';
+
+   let instance: Database | null = null;
+
+   export async function connect() {
+     if (instance) return instance;
+
+     const db = await open({
+       filename: './src/database.sqlite',
+       driver: sqlite3.Database
+     });
+
+     await db.exec(`
+       CREATE TABLE IF NOT EXISTS users (
+         id INTEGER PRIMARY KEY AUTOINCREMENT,
+         name TEXT,
+         email TEXT
+       )
+     `);
+
+     instance = db;
+     return db;
+   }
+   ```
+
+   - `import { open, Database } from 'sqlite';` e `import sqlite3 from 'sqlite3';` importam as bibliotecas necessárias para trabalhar com SQLite.
+   - `connect` é uma função que estabelece a conexão com o banco de dados e cria a tabela `users` se ela não existir.
+
+### 2. Adicione a Rota para Inserir Usuários
+
+1. **Abra o arquivo `src/app.ts`**:
+   - No painel esquerdo do VSCode, clique em **Explorer**.
+   - Encontre e abra o arquivo
+
+ `src/app.ts`.
+
+2. **Adicione a seguinte rota**:
+   ```typescript
+   import { connect } from './database';
+
+   app.post('/users', async (req, res) => {
+     const db = await connect();
+     const { name, email } = req.body;
+
+     const result = await db.run('INSERT INTO users (name, email) VALUES (?, ?)', [name, email]);
+     const user = await db.get('SELECT * FROM users WHERE id = ?', [result.lastID]);
+
+     res.json(user);
+   });
+   ```
+
+   - `app.post('/users', async (req, res) => { ... });` define uma rota que insere um novo usuário no banco de dados.
+   - `const { name, email } = req.body;` extrai os dados da requisição.
+   - `const result = await db.run('INSERT INTO users (name, email) VALUES (?, ?)', [name, email]);` insere o usuário na tabela.
+   - `const user = await db.get('SELECT * FROM users WHERE id = ?', [result.lastID]);` recupera o usuário inserido.
+   - `res.json(user);` envia a resposta com os dados do usuário.
+
+### 3. Teste a Inserção de Dados
+
+1. **Crie um arquivo `requests.http`**:
+   - No painel esquerdo do VSCode, clique em **Explorer**.
+   - Clique com o botão direito na raiz do projeto e selecione **New File**.
+   - Nomeie o arquivo como `requests.http`.
+
+2. **Adicione o seguinte conteúdo ao arquivo**:
+   ```
+   POST http://localhost:3333/users
+   Content-Type: application/json
+
+   {
+     "name": "John Doe",
+     "email": "johndoe@mail.com"
+   }
+   ```
+
+3. **Envie a requisição**:
+   - Abra o arquivo `requests.http` e clique no botão "Send Request" acima da linha `POST http://localhost:3333/users`.
+
+4. **Verifique a resposta**:
+   - Se tudo estiver correto, você verá a resposta com o usuário inserido:
+     ```json
+     {
+       "id": 1,
+       "name": "John Doe",
+       "email": "johndoe@mail.com"
+     }
+     ```
+
+---
+
+## Passo 4: Adicionando Rotas CRUD
+
+### 1. Liste Todos os Usuários
+
+1. **Abra o arquivo `src/app.ts`**:
+   - No painel esquerdo do VSCode, clique em **Explorer**.
+   - Encontre e abra o arquivo `src/app.ts`.
+
+2. **Adicione a rota para listar todos os usuários**:
+   ```typescript
+   app.get('/users', async (req, res) => {
+     const db = await connect();
+     const users = await db.all('SELECT * FROM users');
+
+     res.json(users);
+   });
+   ```
+
+   - A rota `/users` permite listar todos os usuários no banco de dados.
+   - `const users = await db.all('SELECT * FROM users');` recupera todos os usuários.
+   - `res.json(users);` envia a resposta com a lista de usuários.
+
+### 2. Teste a Rota para Listar Todos os Usuários
+
+1. **Adicione a seguinte requisição ao arquivo `requests.http`**:
+   ```
+   GET http://localhost:3333/users
+   ```
+
+2. **Envie a requisição**:
+   - Abra o arquivo `requests.http` e clique no botão "Send Request" acima da linha `GET http://localhost:3333/users`.
+
+3. **Verifique a resposta**:
+   - Se tudo estiver correto, você verá a resposta com a lista de usuários inseridos.
+
+---
